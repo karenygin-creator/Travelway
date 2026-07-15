@@ -1,0 +1,25 @@
+*{
+    border: 1px solid black;
+}
+.page{
+    min-height: 100vh;
+    background-color: azure;
+    
+}
+.main{
+    padding: 100px 50px;
+}
+.placeholder{
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.placeholder h1{
+    margin-bottom: 20px;
+    font-size: 60px;
+}
+.placeholder p{
+    max-width: 500px;
+    color: black;
+    font-size: 20px;
+    line-height: 1.6;
+}
