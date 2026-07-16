@@ -1,0 +1,17 @@
+.tabs{
+    display: flex;
+    align-items: flex-end;
+}
+.tab{
+    min-width: 180px;
+    padding: 16px 24px;
+    background-color: rgb(242, 249, 255);
+    color: rgb(111, 109, 109);
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 12px 12px 0 0;
+}
+.active{
+    background-color:#245ed8;
+    color: white;
+}

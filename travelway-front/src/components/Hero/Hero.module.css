@@ -1,0 +1,49 @@
+.hero{
+    min-height: 520px;
+    background-image: linear-gradient(90deg,
+    rgba(238,247,255,0.9)0%,
+    rgba(238,247,255,0.4)35%,
+    rgba(238,247,255,0.1)65%),
+    url("../../assets/images/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.container{
+    position: relative;
+    max-width: 100%;
+    min-height: 520px;
+    /* margin: 0 auto; */
+    padding: 70px 40px;
+    display: flex;
+    align-items: flex-start;
+}
+.content{
+    max-width: 560px;
+    margin-top: 20px;
+}
+.title{
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.1;
+    color: black;
+}
+.description{
+    margin-top: 25px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: black;
+}
+.searchBlock{
+    position: absolute;
+    left: 100px;
+    right: 50px;
+    bottom: 60px;
+}
+.formPlaceholder{
+    min-height: 120px;
+    padding: 30px;
+    border-radius: 0 14px 14px 14px;
+    background-color: white;
+
+}
