@@ -1,3 +1,4 @@
+import { SearchForm } from "../SearchForm/SearchForm"
 import { TransportTabs } from "../TransportTabs/TransportTabs"
 import styles from "./Hero.module.css"
 export function Hero(){
@@ -16,9 +17,7 @@ export function Hero(){
                 </div>
                 <div className={styles.searchBlock}>
                     <TransportTabs/>
-                    <div className={styles.formPlaceholder}>
-                    Forma
-                </div>
+                    <SearchForm/>
                 </div>
                 
             </div>
