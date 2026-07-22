@@ -33,6 +33,8 @@ export function SearchForm(){
                     tripFrom===searchFrom&&tripTo===searchTo
                 );
             });
+            console.log(trips);
+            
             setFoundTrips(filteredTrips);
         }catch(error){
             if(error instanceof Error){
@@ -48,6 +50,7 @@ export function SearchForm(){
         
     }
     return(
+        <>
         <form className={styles.form}
         onSubmit={handleSubmit}>
             <div className={styles.mainRow}>
@@ -102,10 +105,10 @@ export function SearchForm(){
                     </select>
                 </label>
                 <button type="submit"
-                className={styles.searchButton}>
-                   Найти билеты
+                className={styles.searchButton}
+                disabled={isLoading}>
+                    {isLoading?"Поиск...":"Найти билеты"}
                 </button>
-            
             </div>
             <div className={styles.bottomRow}>
                 <div className={styles.leftButtons}>
@@ -116,7 +119,6 @@ export function SearchForm(){
                     Сложный маршрут
                     </button>
                 </div>
-                
                 <div className={styles.rightButtons}>
                     <button type="button">
                     Багаж
@@ -125,8 +127,30 @@ export function SearchForm(){
                     Корпоративным клиентам
                     </button>
                 </div>
-                
             </div>
         </form>
+        <div className={styles.results}>
+            {error&&(
+                <p className={styles.error}>
+                    {error}
+                </p>
+            )}
+            {!isLoading&&!error&&foundTrips.length===0&&(
+                <p className={styles.empty}>Поездки не найдены</p>
+            )}
+            {foundTrips.map((trip)=>(
+                <div>
+                    <h3>
+                        {trip.from_city}→{trip.to_city}
+                    </h3>
+                    <p>
+                        Прямой маршрут
+                    </p>
+                    <strong>{trip.price.toLocaleString("ru-RU")}rub</strong>
+                    <button type="button">Выбрать</button>
+                </div>
+            ))}
+        </div>
+        </>
     )
 }

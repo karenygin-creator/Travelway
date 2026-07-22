@@ -92,3 +92,7 @@
 .rightButtons{
     margin-right: 280px;
 }
+.searchButton:disabled{
+    background-color: aqua;
+    cursor: not-allowed;
+}
