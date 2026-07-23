@@ -12,3 +12,11 @@ export interface User{
     phone:string;
     role:string;
 }
+export interface LoginData{
+    email:string;
+    password:string;
+}
+export interface LoginResponse{
+    message:string;
+    user_id:number;
+} 

@@ -24,6 +24,8 @@ export function SearchForm(){
             setError("");
             setFoundTrips([]);
             const trips=await getTrips();
+            console.log(trips);
+            
             const filteredTrips=trips.filter((trip)=>{
                 const tripFrom=trip.from_city.trim().toLowerCase();
                 const tripTo=trip.to_city.trim().toLowerCase();

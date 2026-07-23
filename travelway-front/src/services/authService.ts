@@ -1,4 +1,4 @@
-import type { RegisterData, User } from "../type/auth";
+import type { LoginData, LoginResponse, RegisterData, User } from "../type/auth";
 
 export async function registerUser(data:RegisterData):Promise<User>{
     const response=await fetch("/api/auth/register",{
@@ -14,4 +14,19 @@ export async function registerUser(data:RegisterData):Promise<User>{
     }
     const user:User=await response.json();
     return user;
+}
+export async function loginUser(data:LoginData):Promise<LoginResponse>{
+    const response=await fetch("/api/auth/login",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data),
+    });
+    if(!response.ok){
+        const error=await response.json();
+        throw new Error(error.detail||"Ошибка Авторизации");  
+    }
+    const result:LoginResponse=await response.json();
+    return result;
 }

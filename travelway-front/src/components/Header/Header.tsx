@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 export function Header(){
     return(
@@ -31,12 +32,17 @@ export function Header(){
                     <button 
                     type="button"
                     className={styles.loginButton}>
+                        <Link to="/login">
                         Войти
+                        </Link>
                     </button>
                     <button 
                     type="button"
                     className={styles.registerButton}>
+                        <Link to="/register">
                         Регистрация
+                        </Link>
+                        
                     </button>
                 </div>
             </div>
