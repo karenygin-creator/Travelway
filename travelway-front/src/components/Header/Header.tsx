@@ -15,6 +15,9 @@ export function Header(){
                     <a href="#">Сервисы</a>
                     <a href="#">Информация</a>
                     <a href="#">О компании</a>
+                    <Link to="/bookings">
+                    Мои бронирования
+                    </Link>
                 </nav>
                 <div className={styles.actions}>
                     <button 

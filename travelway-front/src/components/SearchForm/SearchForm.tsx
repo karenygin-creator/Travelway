@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react"
 import styles from "./SearchForm.module.css"
 import type { Trip } from "../../type/trip";
 import { getTrips } from "../../services/tripService";
+import { useNavigate } from "react-router-dom";
+import { createBooking } from "../../services/bookingService";
 type TravelClass="economy"|"business"
 export function SearchForm(){
     const[fromCity,setFromCity]=useState("Москва");
@@ -12,10 +14,36 @@ export function SearchForm(){
     const[travelClass,setTravelClass]=useState<TravelClass>("economy");
     const[foundTrips,setFoundTrips]=useState<Trip[]>([]);
     const[isLoading,setIsLoading]=useState(false);
-    const[error,setError]=useState("")
+    const[error,setError]=useState("");
+    const[bookingMessage,setBookingMessage]=useState("");
+    const navigate=useNavigate();
     function swapCities(){
         setFromCity(toCity);
         setToCity(fromCity);
+    }
+    async function handleBooking(tripId:number){
+        const savedUserId=localStorage.getItem("userId");
+        if(!savedUserId){
+            setError("Сначала войдите в аккаунт");
+            navigate("/login");
+            return;
+        }
+        try {
+            setError("");
+            setBookingMessage("");
+            const booking=await createBooking({
+                user_id:Number(savedUserId),
+                trip_id:tripId,
+            })
+            setBookingMessage(`Бронирование ${booking.id} успешно создано`)
+        } catch (error) {
+            if(error instanceof Error){
+                setError(error.message);
+            }
+            else{
+                setError("Ошибка ")
+            }
+        }
     }
    async function handleSubmit(event:FormEvent<HTMLFormElement>){
         event.preventDefault();
@@ -137,11 +165,16 @@ export function SearchForm(){
                     {error}
                 </p>
             )}
+            {bookingMessage&&(
+                <p>
+                    {bookingMessage}
+                </p>
+            )}
             {!isLoading&&!error&&foundTrips.length===0&&(
                 <p className={styles.empty}>Поездки не найдены</p>
             )}
             {foundTrips.map((trip)=>(
-                <div>
+                <div key={trip.id}>
                     <h3>
                         {trip.from_city}→{trip.to_city}
                     </h3>
@@ -149,7 +182,10 @@ export function SearchForm(){
                         Прямой маршрут
                     </p>
                     <strong>{trip.price.toLocaleString("ru-RU")}rub</strong>
-                    <button type="button">Выбрать</button>
+                    <button type="button"
+                    onClick={()=>handleBooking(trip.id)}>
+                        Забронировать
+                        </button>
                 </div>
             ))}
         </div>
